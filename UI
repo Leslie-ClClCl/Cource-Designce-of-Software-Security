@@ -1,0 +1,170 @@
+from tkinter import *
+from tkinter import filedialog
+from tkinter import ttk
+import tkinter.messagebox
+
+import Fun1_New
+import Fun2
+
+
+def main():
+
+    def closeThisWindow():
+        root.destroy()
+
+    def show1():
+
+        def selectCfileA():
+            filename1 = filedialog.askopenfilename(title='选择一个C文件', filetypes=[('C语言文件', '*.c'), ('All Files', '*')])
+            nameBoxA.delete(0, END)
+            nameBoxA.insert(INSERT, filename1)
+            fo = open(filename1, 'r')
+            codeSourceA = fo.read()
+            fo.close()
+            codeBoxA.insert(0.0, codeSourceA)
+
+        def selectCfileB():
+            nameBoxB.delete(0, END)
+            filename2 = filedialog.askopenfilename(title='选择一个C文件', filetypes=[('C语言文件', '*.c'), ('All Files', '*')])
+            nameBoxB.insert(INSERT, filename2)
+            fo = open(filename2, 'r')
+            codeSourceB = fo.read()
+            fo.close()
+            codeBoxB.insert(0.0, codeSourceB)
+
+        def doProcess():
+            result = Fun1_New.func1(codeBoxA, codeBoxB)
+            tkinter.messagebox.showinfo('结果', '这两份代码的重复率为： %f'%(result))
+
+        top1 = Toplevel()
+        label1 = Label(top1, text='请选择文件:')
+        label2 = Label(top1, text='请选择文件:')
+        nameBoxA = Entry(top1, bg='white', width=45)
+        nameBoxB = Entry(top1, bg='white', width=45)
+        codeBoxA = Text(top1)
+        codeBoxB = Text(top1)
+        uploadButtonA = Button(top1, text='浏览', width=8, command=selectCfileA)
+        uploadButtonB = Button(top1, text='浏览', width=8, command=selectCfileB)
+        poccessButton = Button(top1, text='处理', width=8, command=doProcess)
+        exitButton = Button(top1, text='退出', width=8, command=closeThisWindow)
+
+        label1.pack()
+        nameBoxA.pack()
+        uploadButtonA.pack()
+        poccessButton.pack()
+        exitButton.pack()
+
+        label1.place(x=30, y=30)
+        label2.place(x=500, y=30)
+        nameBoxA.place(x=100, y=30, width=290)
+        nameBoxB.place(x=600, y=30, width=290)
+        codeBoxA.place(x=30, y=70, width=440, height=600)
+        codeBoxB.place(x=500, y=70, width=440, height=600)
+        uploadButtonA.place(x=400, y=32)
+        uploadButtonB.place(x=900, y=32)
+        poccessButton.place(x=240, y=700)
+        exitButton.place(x=740, y=700)
+
+        top1.geometry('1000x750+30+30')
+        top1.mainloop()
+
+    def show2():
+
+        def selectCfileA():
+            filename1 = filedialog.askopenfilename(title='选择一个C文件', filetypes=[('C语言文件', '*.c'), ('All Files', '*')])
+            nameBoxA.delete(0, END)
+            nameBoxA.insert(INSERT, filename1)
+            fo = open(filename1, 'r')
+            codeSourceA = fo.read()
+            fo.close()
+            codeBoxA.insert(0.0, codeSourceA)
+
+        def selectCfileB():
+            nameBoxB.delete(0, END)
+            filename2 = filedialog.askopenfilename(title='选择一个C文件', filetypes=[('C语言文件', '*.c'), ('All Files', '*')])
+            nameBoxB.insert(INSERT, filename2)
+            fo = open(filename2, 'r')
+            codeSourceB = fo.read()
+            fo.close()
+            codeBoxB.insert(0.0, codeSourceB)
+
+        def doProcess():
+            result = Fun2.func2(codeBoxA, codeBoxB)
+            tkinter.messagebox.showinfo('结果', '这两份代码的重复率为： %f' % result)
+
+        top2 = Toplevel()
+        label1 = Label(top2, text='请选择文件:')
+        label2 = Label(top2, text='请选择文件:')
+        nameBoxA = Entry(top2, bg='white', width=45)
+        nameBoxB = Entry(top2, bg='white', width=45)
+        codeBoxA = Text(top2)
+        codeBoxB = Text(top2)
+        uploadButtonA = Button(top2, text='浏览', width=8, command=selectCfileA)
+        uploadButtonB = Button(top2, text='浏览', width=8, command=selectCfileB)
+        poccessButton = Button(top2, text='处理', width=8, command=doProcess)
+        exitButton = Button(top2, text='退出', width=8, command=closeThisWindow)
+
+        label1.pack()
+        nameBoxA.pack()
+        uploadButtonA.pack()
+        poccessButton.pack()
+        exitButton.pack()
+
+        label1.place(x=30, y=30)
+        label2.place(x=500, y=30)
+        nameBoxA.place(x=100, y=30, width=290)
+        nameBoxB.place(x=600, y=30, width=290)
+        codeBoxA.place(x=30, y=70, width=440, height=600)
+        codeBoxB.place(x=500, y=70, width=440, height=600)
+        uploadButtonA.place(x=400, y=32)
+        uploadButtonB.place(x=900, y=32)
+        poccessButton.place(x=240, y=700)
+        exitButton.place(x=740, y=700)
+
+        top2.geometry('1000x750+30+30')
+        top2.mainloop()
+        return 0
+
+    # 初始化
+    root = Tk()
+
+    # 设置窗体标题
+    root.title('软件安全课程设计 -- by Leslie')
+
+    # 设置窗口大小和位置
+    root.geometry('550x300')
+    # 以下方法用来计算并设置窗体显示时，在屏幕中心居中
+    scnWidth, scnHeight = root.maxsize()  # get screen width and height
+    tmpcnf = '+%d+%d' % ((scnWidth - 500) / 2, (scnHeight - 300) / 2)
+    root.geometry(tmpcnf)
+
+    top_frame = Frame(root, bg='#fff')
+    image_file = PhotoImage(file="Pic/xiaohui.png")
+    index_lable = Label(top_frame, text='Index', font=('Times', '30', 'bold italic'))
+    logo_lable = Label(top_frame, image=image_file)
+
+    top_frame.pack(fill=X, side=TOP, padx=15, pady=8)
+    index_lable.pack(anchor='w', padx=16, pady=8)
+    # logo_lable.pack(anchor='ne')
+
+    content_frame = Frame(root, bg='#d9d9d9')
+    button_frame1 = Frame(content_frame, bg='#d9d9d9')
+    button_frame2 = Frame(content_frame, bg='#d9d9d9')
+    button_frame3 = Frame(content_frame, bg='#d9d9d9')
+    b1 = ttk.Button(button_frame1, text='利用字符串匹配进行同源性检测', command=show1)
+    b2 = ttk.Button(button_frame1, text='利用控制流程图CFG进行源代码同源性检测', command=show2)
+    b3 = ttk.Button(button_frame2, text='利用字符串匹配进行同源性检测', command=show1)
+    b4 = ttk.Button(button_frame2, text='利用控制流程图CFG进行源代码同源性检测', command=show2)
+
+    content_frame.pack(fill=X, side=TOP, expand=YES)
+    button_frame1.pack(side='top', ipadx=5, ipady=8)
+    button_frame2.pack(side='top', ipadx=5, ipady=8)
+    b1.pack(side="left")
+    b2.pack(side="left")
+    b3.pack(side="left")
+    b4.pack(side="left")
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
